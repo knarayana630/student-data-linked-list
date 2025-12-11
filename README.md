@@ -6,7 +6,7 @@ It supports adding, updating, searching, and deleting student records dynamicall
 ## 🔧 Features
 - Add new student  
 - Delete student  
-- Search student by roll number  
+- Search student by name 
 - Update student details  
 - Display all students  
 - Dynamic memory allocation  
