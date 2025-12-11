@@ -8,6 +8,7 @@ char name[20];
 float marks;
 struct student *next;
 }SLL;
+///////////////////////////////////////////////
 void add_node(SLL **hptr)
 {
 SLL *new;
@@ -17,6 +18,7 @@ scanf("%d %s %f",&new->id,new->name,&new->marks);
 new->next=*hptr;
 *hptr=new;
 }
+//////////////////////////////////////////////
 void print_node(SLL *hptr)
 {
 	if(hptr==0)
@@ -30,6 +32,7 @@ printf("%d %s %f:\n",hptr->id,hptr->name,hptr->marks);
 hptr=hptr->next;
 }
 }
+////////////////////////////////////////////////////////
 int count_node(SLL *hptr)
 {
 	if(hptr==0)
@@ -87,7 +90,7 @@ new->next=dup->next;
 dup->next=new;
 }
 }
-/////////////////////////////
+/////////////////////////////////////////////////
 void save_file(SLL *hptr)
 {
 	
@@ -108,7 +111,7 @@ fclose(fp);
 
 
 }
-/////////////////////////////////
+///////////////////////////////////////////////////
 void read_file(SLL **hptr)
 {
 SLL *new,*dup;
@@ -163,12 +166,10 @@ if(*hptr==0)
 {
 printf("no records found\n");
 return;
-
 }
 dup=*hptr;
 while(dup)
 {
-
 *hptr=dup->next;
 free(dup);
 dup=*hptr;
@@ -195,7 +196,6 @@ a[i]=dup;
 dup=dup->next;
 i++;
 }
-
 for(i=c-1;i>0;i--)
 {
 a[i]->next=a[i-1];
@@ -239,8 +239,65 @@ if(hptr->next!=0)
 printf("%d %s %f\n",hptr->id,hptr->name,hptr->marks);
 
 }
+/////////////////////////////////////////////////
 
+void reverse_print(SLL *hptr)
+{
+if(hptr==0)
+{
+printf("no nodes are available\n");
+return;
+}
+SLL *dup;
+int i,j,c;
+c=count_node(hptr);
 
+for(i=0;i<c;i++)
+{
+        dup=hptr;
+for(j=0;j<c-1-i;j++)
+{
+dup=dup->next;
+}
+printf("%d %s %f\n",dup->roll,dup->name,dup->marks);
+}
+}
+/////////////////////////////////////////////////
+void sort_data(SLL *hptr)
+{
+if(hptr==0)
+{
+printf("no nodes are available\n");
+return;
+}
+SLL *dup;
+int c,i,j,t;
+char s[20];
+c=count_node(hptr);
+for(i=0;i<c-1;i++)
+{
+        dup=hptr;
+
+for(j=0;j<c-1-i;j++)
+{
+if(dup->roll>(dup->next->roll))
+{
+t=dup->roll;
+dup->roll=dup->next->roll;
+dup->next->roll=t;
+
+strcpy(s,dup->name);
+strcpy(dup->name,dup->next->name);
+strcpy(dup->next->name,s);
+
+t=dup->marks;
+dup->marks=dup->next->marks;
+dup->next->marks=t;
+}
+dup=dup->next;
+}
+}
+}
 ///////////////////////////////////////
 void main()
 {
@@ -248,7 +305,7 @@ void main()
 	int op,c;
 while(1)
 {
-printf("Enter the number:1)add_node2)print_node3)count_node4)add_end5)add_middle6)save_file7)read_file8)delete_node9)delete_all10)reverse_link11)reverse_print12)rev_rec13)print_rec14)sorting_node:\n");
+printf("Enter the number:1)add_node 2)print_node 3)count_node 4)add_end 5)add_middle 6)save_file 7)read_file 8)delete_node 9)delete_all 10)reverse_link 11)reverse_print 12)rev_rec 13)print_rec 14)sorting_node 15)Exit:\n");
 	scanf("%d",&op);
 	
 	switch(op)
@@ -256,37 +313,20 @@ printf("Enter the number:1)add_node2)print_node3)count_node4)add_end5)add_middle
 	
 		case 1: add_node(&headptr);break;
 		case 2: print_node(headptr);break;	
-		case 3: c=count_node(headptr);break;
-			printf("%d\n",c);
-
+		case 3: c=count_node(headptr);
+			    printf("%d\n",c);break;	     
 		case 4: add_end(&headptr);break;
 		case 5: add_middle(&headptr);break;
 		case 6: save_file(headptr);break;
 		case 7: read_file(&headptr);break;
 		case 8: delete_node(&headptr);break;
 		case 9: delete_all(&headptr);break;
-        	case 10: reverse_link(&headptr);break;	
+        case 10: reverse_link(&headptr);break;	
 		case 11: reverse_print(headptr);break;
-		case 12: reverse_rec(headptr);break;	 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		case 12: reverse_rec(headptr);break;
+		case 13 : reverse_print(headptr);break;
+		case 14: sorting_node(headptr);break;
+		case 15 :exit(0);break;
 	}
-
-
 }
 }
