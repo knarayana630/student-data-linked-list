@@ -298,6 +298,30 @@ dup=dup->next;
 }
 }
 }
+//////////////////////////////////////////////////
+void search_node(SLL *hptr)
+{
+if(hptr==0)
+{
+printf("no  nodes are available \n");
+return;
+}
+char name[20];
+printf("enter name to search:\n");
+scanf("%s",name);
+int f=0;
+while(hptr)
+{
+if(strcmp(hptr->name,name)==0)
+{
+printf("%d %s %f\n",hptr->roll,hptr->name,hptr->marks);
+f=1;
+}
+hptr=hptr->next;
+}
+if(f==0)
+printf("name not found\n");
+}
 ///////////////////////////////////////
 void main()
 {
@@ -305,7 +329,7 @@ void main()
 	int op,c;
 while(1)
 {
-printf("Enter the number:1)add_node 2)print_node 3)count_node 4)add_end 5)add_middle 6)save_file 7)read_file 8)delete_node 9)delete_all 10)reverse_link 11)reverse_print 12)rev_rec 13)print_rec 14)sorting_node 15)Exit:\n");
+printf("Enter the number:1)add_node 2)print_node 3)count_node 4)add_end 5)add_middle 6)save_file 7)read_file 8)delete_node 9)delete_all 10)reverse_link 11)reverse_print 12)rev_rec 13)print_rec 14)sorting_node 15)search_node 16)Exit:\n");
 	scanf("%d",&op);
 	
 	switch(op)
@@ -326,7 +350,8 @@ printf("Enter the number:1)add_node 2)print_node 3)count_node 4)add_end 5)add_mi
 		case 12: reverse_rec(headptr);break;
 		case 13 : reverse_print(headptr);break;
 		case 14: sorting_node(headptr);break;
-		case 15 :exit(0);break;
+		case 15:search_node(headptr);break;
+		case 16:exit(0);break;
 	}
 }
 }
